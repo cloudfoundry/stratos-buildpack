@@ -2,4 +2,10 @@
 # bin/detect <build-dir>
 set -e
 
-exit 1
+BUILDPACK=$(dirname $(dirname $0))
+
+if [ -f $1/multi-buildpack.yml ]; then
+  echo "Stratos UI buildpack" && exit 0
+else
+  exit 1
+fi
