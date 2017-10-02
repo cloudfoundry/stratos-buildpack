@@ -3,5 +3,5 @@
 cat <<EOF
 ---
 default_process_types:
-  web: ./start.sh
+  web: ./output/portal-proxy
 EOF

@@ -39,10 +39,16 @@ echo "Node: $NodeDir"
 
 ls -al $NodeDir
 
-export PATH=$NodeDir/bin:$GoInstallDir/go/bin:$PATH
+export PATH=$NodeDir/bin:$GoInstallDir/go/bin:$GlideInstallDir:$PATH
 
 echo $PATH
 
 node --version
 npm --version
 go version
+glide -v
+
+# Build the console
+$BUILD_DIR/deploy/cloud-foundry/build.sh
+
+echo "Stratos UI : Build complete"
