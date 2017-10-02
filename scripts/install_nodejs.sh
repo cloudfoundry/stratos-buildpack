@@ -34,7 +34,7 @@ if [ ! -f $NodeDir/bin/node ]; then
   exit 1
 fi
 
-export NODE_HOME=$NodeDir/lib/node_modules
+export NODE_HOME=$NodeDir
 echo $NODE_HOME
 
 ls -al $NODE_HOME

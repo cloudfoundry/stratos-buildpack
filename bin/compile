@@ -19,6 +19,9 @@ echo "Stack ${CF_STACK}"
 # Install go
 source "$BUILDPACK_DIR/scripts/install_go.sh"
 
+# Install glide
+source "$BUILDPACK_DIR/scripts/install_glide.sh"
+
 # Install nodejs
 source "$BUILDPACK_DIR/scripts/install_nodejs.sh"
 
@@ -39,7 +42,7 @@ echo "Node: $NodeDir"
 
 ls -al $NodeDir
 
-export PATH=$NodeDir/bin:$GoInstallDir/go/bin:$GlideInstallDir:$PATH
+export PATH=$NodeDir/bin:$GoInstallDir/go/bin:$GlideDir:$PATH
 
 echo $PATH
 
