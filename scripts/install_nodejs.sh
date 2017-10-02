@@ -27,8 +27,6 @@ fi
 
 ls -al $NodeInstallDir
 
-node-v6.11.3-linux-x64
-
 export NodeDir="$NodeInstallDir/node-v${NODE_VERSION}-linux-x64"
 
 echo $NodeDir
