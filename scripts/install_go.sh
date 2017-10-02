@@ -27,24 +27,3 @@ if [ ! -f $GoInstallDir/go/bin/go ]; then
   echo "       **ERROR** Could not download go"
   exit 1
 fi
-
-# Download glide
-
-GLIDE_VERSION="0.13.0"
-
-URL=https://github.com/Masterminds/glide/releases/download/v${GLIDE_VERSION}/glide-v${GLIDE_VERSION}-linux-amd64.tar.gz
-
-export GlideInstallDir="/tmp/glide/$GLIDE_VERSION"
-mkdir -p $GlideInstallDir
-
-echo "-----> Download glide ${GLIDE_VERSION}"
-curl -s -L --retry 15 --retry-delay 2 $URL -o /tmp/glide.tar.gz
-
-tar xzf /tmp/glide.tar.gz -C $GlideInstallDir
-rm /tmp/glide.tar.gz
-
-export GlideInstallDir=$GlideInstallDir/linux-amd64
-if [ ! -f $GlideInstallDir/glide ]; then
-  echo "       **ERROR** Could not download glide"
-  exit 1
-fi

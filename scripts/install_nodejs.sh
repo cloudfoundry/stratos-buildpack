@@ -35,6 +35,3 @@ if [ ! -f $NodeDir/bin/node ]; then
 fi
 
 export NODE_HOME=$NodeDir
-echo $NODE_HOME
-
-ls -al $NODE_HOME

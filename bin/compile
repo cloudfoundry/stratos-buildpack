@@ -12,7 +12,6 @@ ${BUILDPACK_DIR}/bin/debug $1 $2
 #mkdir -p "$BUILD_DIR/.profile.d"
 #echo "export DEPS_DIR=\$HOME/.cloudfoundry" > "$BUILD_DIR/.profile.d/0000_set-deps-dir.sh"
 
-
 echo "Stratos UI Buildpack"
 echo "Stack ${CF_STACK}"
 
@@ -25,12 +24,7 @@ source "$BUILDPACK_DIR/scripts/install_glide.sh"
 # Install nodejs
 source "$BUILDPACK_DIR/scripts/install_nodejs.sh"
 
-output_dir=$(mktemp -d -t compileXXX)
-
 echo "-----> Running stratos build compile"
-#GOROOT=$GoInstallDir/go GOPATH=$BUILDPACK_DIR $GoInstallDir/go/bin/go build -o $output_dir/supply go/supply/cli
-
-#$output_dir/supply "$BUILD_DIR" "$CACHE_DIR" "$DEPS_DIR" "$DEPS_IDX"
 
 echo "Listing build folder contents"
 
@@ -38,20 +32,41 @@ ls -al $BUILD_DIR
 
 echo "Checking go and nodejs versions"
 
-echo "Node: $NodeDir"
-
-ls -al $NodeDir
-
 export PATH=$NodeDir/bin:$GoInstallDir/go/bin:$GlideDir:$PATH
-
-echo $PATH
 
 node --version
 npm --version
 go version
 glide -v
 
+# Store the node_modules in the cache folder via a symlink
+if [ ! -d "$CACHE_DIR" ]; then
+  echo "Cache directory [$CACHE_DIR] does not exist"
+  mkdir -p "$CACHE_DIR"
+else
+  echo "Cache directory [$CACHE_DIR] exists"
+fi
+
+if [ ! -d "$CACHE_DIR/node_modules" ]; then
+  mkdir -p "$CACHE_DIR/mode_modules"
+fi
+
+if [ ! -d "$CACHE_DIR/bower_components" ]; then
+  mkdir -p "$CACHE_DIR/bower_components"
+fi
+
+# node_modules is a symbolic link
+ln -s $CACHE_DIR/mode_modules $BUILD_DIR/node_modules
+# bower_components is a symbolic link
+ln -s $CACHE_DIR/bower_components $BUILD_DIR/bower_components
+
 # Build the console
 $BUILD_DIR/deploy/cloud-foundry/build.sh
 
 echo "Stratos UI : Build complete"
+
+echo "Build directory [$BUILD_DIR] exists"
+echo "Build directory contents..."
+ls -lah $BUILD_DIR
+
+du --summarize -h $BUILD_DIR
