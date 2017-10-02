@@ -4,10 +4,11 @@ set -euo pipefail
 BUILD_DIR=$1
 CACHE_DIR=$2
 export BUILDPACK_DIR=`dirname $(readlink -f ${BASH_SOURCE%/*})`
-export DEPS_DIR="$BUILD_DIR/.cloudfoundry"
-mkdir -p "$DEPS_DIR/0"
-mkdir -p "$BUILD_DIR/.profile.d"
-echo "export DEPS_DIR=\$HOME/.cloudfoundry" > "$BUILD_DIR/.profile.d/0000_set-deps-dir.sh"
+
+#export DEPS_DIR="$BUILD_DIR/.cloudfoundry"
+#mkdir -p "$DEPS_DIR/0"
+#mkdir -p "$BUILD_DIR/.profile.d"
+#echo "export DEPS_DIR=\$HOME/.cloudfoundry" > "$BUILD_DIR/.profile.d/0000_set-deps-dir.sh"
 
 
 echo "Stratos UI Buildpack"
@@ -15,9 +16,9 @@ echo "Stack ${CF_STACK}"
 
 # Install go
 source "$BUILDPACK_DIR/scripts/install_go.sh"
-output_dir=$(mktemp -d -t supplyXXX)
+output_dir=$(mktemp -d -t compileXXX)
 
-echo "-----> Running go build supply"
+echo "-----> Running stratos build compile"
 #GOROOT=$GoInstallDir/go GOPATH=$BUILDPACK_DIR $GoInstallDir/go/bin/go build -o $output_dir/supply go/supply/cli
 
 #$output_dir/supply "$BUILD_DIR" "$CACHE_DIR" "$DEPS_DIR" "$DEPS_IDX"
