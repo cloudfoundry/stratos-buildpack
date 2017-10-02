@@ -68,6 +68,8 @@ ln -s $CACHE_DIR/bower_components $BUILD_DIR/bower_components
 
 ls -al $BUILD_DIR
 
+npm install -g node-sass
+
 # Build the console
 $BUILD_DIR/deploy/cloud-foundry/build.sh
 
