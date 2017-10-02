@@ -1,0 +1,12 @@
+---
+language: stratos-ui
+dependencies: []
+pre_package: scripts/build.sh
+include_files:
+  - bin/compile
+  - bin/detect
+  - bin/release
+  - bin/supply
+  - bin/finalize
+  - manifest.yml
+  - README.md
