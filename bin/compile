@@ -13,7 +13,7 @@ export BUILDPACK_DIR=`dirname $(readlink -f ${BASH_SOURCE%/*})`
 #echo "export DEPS_DIR=\$HOME/.cloudfoundry" > "$BUILD_DIR/.profile.d/0000_set-deps-dir.sh"
 
 echo "Stratos UI Buildpack"
-echo "Stack ${CF_STACK}"
+echo "-----> Stack ${CF_STACK}"
 
 # Install go
 source "$BUILDPACK_DIR/scripts/install_go.sh"
@@ -23,8 +23,6 @@ source "$BUILDPACK_DIR/scripts/install_glide.sh"
 
 # Install nodejs
 source "$BUILDPACK_DIR/scripts/install_nodejs.sh"
-
-echo "-----> Running stratos build compile"
 
 echo "-----> Checking versions"
 
@@ -56,7 +54,9 @@ ln -s $CACHE_DIR/node_modules $BUILD_DIR/node_modules
 # bower_components is a symbolic link
 ln -s $CACHE_DIR/bower_components $BUILD_DIR/bower_components
 
+echo "-----> Running stratos build compile"
+
 # Build the console
 $BUILD_DIR/deploy/cloud-foundry/build.sh
 
-echo "Stratos UI : Build complete"
+echo "-----> Stratos UI build complete"

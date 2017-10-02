@@ -13,7 +13,7 @@ rm -rf $BUILD_DIR/dist
 rm -rf $BUILD_DIR/outputs
 
 # Do not use the Procfile if it is there
-rm -rf Procfile
+rm -rf $BUILD_DIR/Procfile
 
 cat <<EOF
 ---
