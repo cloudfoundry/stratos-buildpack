@@ -5,7 +5,9 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 export BUILDPACK_DIR=`dirname $(readlink -f ${BASH_SOURCE%/*})`
 
-#${BUILDPACK_DIR}/bin/debug $1 $2
+if [ -f $BUILD_DIR/stratos-debug ]; then
+  ${BUILDPACK_DIR}/bin/debug $1 $2
+fi
 
 #export DEPS_DIR="$BUILD_DIR/.cloudfoundry"
 #mkdir -p "$DEPS_DIR/0"
