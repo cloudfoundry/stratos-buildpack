@@ -57,7 +57,7 @@ fi
 if [ ! -d "$CACHE_DIR/bower_components" ]; then
   mkdir -p "$CACHE_DIR/bower_components"
 else
-  echo "Cache directory node_modules exists"
+  echo "Cache directory bower_components exists"
   ls -al $CACHE_DIR/bower_components
 fi
 
