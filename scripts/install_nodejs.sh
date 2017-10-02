@@ -29,11 +29,7 @@ ls -al $NodeInstallDir
 
 export NodeDir="$NodeInstallDir/node-v${NODE_VERSION}-linux-x64"
 
-echo $NodeDir
-ls -al $NodeDir
-ls -al $NodeDir/bin
-
-#if [ ! -f $NodeInstallDir/go/bin/go ]; then
-#  echo "       **ERROR** Could not download nodejs"
-#  exit 1
-#fi
+if [ ! -f $NodeDir/bin/node ]; then
+  echo "       **ERROR** Could not download nodejs"
+  exit 1
+fi

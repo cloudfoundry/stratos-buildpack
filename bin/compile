@@ -37,4 +37,12 @@ echo "Checking go and nodejs versions"
 
 echo "Node: $NodeDir"
 
-ls -al $NodelDir
+ls -al $NodeDir
+
+export PATH=$NodeDir/bin:$GoInstallDir/go/bin:$PATH
+
+echo $PATH
+
+node --version
+npm --version
+go version
