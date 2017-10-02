@@ -12,12 +12,12 @@ if [ ! -d "$BUILD_DIR" ]; then
 else
   echo "Build directory [$BUILD_DIR] exists"
   echo "Build directory contents..."
-  ls -laRh $BUILD_DIR
+  ls -lah $BUILD_DIR
 fi
 
 echo
-echo "Home Directory:"
-ls -laRh "/home"
+echo "Home Directory /home:"
+ls -lah "/home"
 
 if [ ! -d "$CACHE_DIR" ]; then
   echo "Cache directory [$CACHE_DIR] does not exist"
@@ -39,9 +39,6 @@ ls -la
 echo "Listing Build Pack Directory:"
 ls -la /tmp/buildpacks
 
-echo "Listing Build Pack Cache:"
-ls -la "$BUILDPACK_CACHE"
-
 echo "Listing Environment:"
 env
 
@@ -54,20 +51,9 @@ df -h
 echo "Listing OS Info:"
 cat /etc/issue
 
-echo "Listing script versions:"
-python -V
-echo
-ruby -v
-echo
-perl -v
-
 echo "User Limits:"
 ulimit -a
 echo
-
-echo "Check for FUSE support"
-/sbin/mount.fuse -h
-ls -l /usr/share/doc/fuse-utils
 
 echo "CPU Info"
 cat /proc/cpuinfo

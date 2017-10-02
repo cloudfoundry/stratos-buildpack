@@ -32,3 +32,9 @@ echo "-----> Running stratos build compile"
 echo "Listing build folder contents"
 
 ls -al $BUILD_DIR
+
+echo "Checking go and nodejs versions"
+
+echo "Node: $NodeDir"
+
+ls -al $NodelDir
