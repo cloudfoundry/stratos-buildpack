@@ -25,8 +25,6 @@ if [ ! -f $NodeInstallDir/go/bin/go ]; then
   rm /tmp/nodejs.tar.gz
 fi
 
-ls -al $NodeInstallDir
-
 export NodeDir="$NodeInstallDir/node-v${NODE_VERSION}-linux-x64"
 
 if [ ! -f $NodeDir/bin/node ]; then

@@ -24,14 +24,13 @@ source "$BUILDPACK_DIR/scripts/install_glide.sh"
 # Install nodejs
 source "$BUILDPACK_DIR/scripts/install_nodejs.sh"
 
-echo "-----> Checking versions"
-
 export PATH=$NodeDir/bin:$GoInstallDir/go/bin:$GlideDir:$PATH
 
-node --version
-npm --version
-go version
-glide -v
+echo "-----> Checking versions"
+echo "---------> Node Version: `node --version`"
+echo "---------> NPM Version: `npm --version`"
+echo "---------> Go Version: `go version`"
+echo "---------> Glide Version: `glide -v`"
 
 # Store the node_modules in the cache folder via a symlink
 if [ ! -d "$CACHE_DIR" ]; then
