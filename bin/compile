@@ -80,3 +80,5 @@ echo "Build directory contents..."
 ls -lah $BUILD_DIR
 
 du --summarize -h $BUILD_DIR
+
+ls -lah $BUILD_DIR/outputs
