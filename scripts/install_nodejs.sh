@@ -33,3 +33,8 @@ if [ ! -f $NodeDir/bin/node ]; then
   echo "       **ERROR** Could not download nodejs"
   exit 1
 fi
+
+export NODE_HOME=$NodeDir/lib/node_modules
+echo $NODE_HOME
+
+ls -al $NODE_HOME
