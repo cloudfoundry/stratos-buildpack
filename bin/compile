@@ -5,6 +5,8 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 export BUILDPACK_DIR=`dirname $(readlink -f ${BASH_SOURCE%/*})`
 
+./debug $1 $2 $3 $4 $5 $6 $7 $8 $9
+
 #export DEPS_DIR="$BUILD_DIR/.cloudfoundry"
 #mkdir -p "$DEPS_DIR/0"
 #mkdir -p "$BUILD_DIR/.profile.d"
@@ -16,6 +18,10 @@ echo "Stack ${CF_STACK}"
 
 # Install go
 source "$BUILDPACK_DIR/scripts/install_go.sh"
+
+# Install nodejs
+source "$BUILDPACK_DIR/scripts/install_nodejs.sh"
+
 output_dir=$(mktemp -d -t compileXXX)
 
 echo "-----> Running stratos build compile"
@@ -23,3 +29,6 @@ echo "-----> Running stratos build compile"
 
 #$output_dir/supply "$BUILD_DIR" "$CACHE_DIR" "$DEPS_DIR" "$DEPS_IDX"
 
+echo "Listing build folder contents"
+
+ls -al $BUILD_DIR

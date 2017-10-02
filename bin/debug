@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+
+BUILD_DIR=$1
+CACHE_DIR=$2
+BUILD_PACK_DIR=$(dirname $(dirname $0))
+
+echo "All arguments [$@]"
+
+if [ ! -d "$BUILD_DIR" ]; then
+  echo "Build directory [$BUILD_DIR] does not exist"
+#  mkdir -p "$BUILD_DIR"
+else
+  echo "Build directory [$BUILD_DIR] exists"
+  echo "Build directory contents..."
+  ls -laRh $BUILD_DIR
+fi
+
+echo
+echo "Home Directory:"
+ls -laRh "/home"
+
+if [ ! -d "$CACHE_DIR" ]; then
+  echo "Cache directory [$CACHE_DIR] does not exist"
+#  mkdir -p "$CACHE_DIR"
+else
+  echo "Cache directory [$CACHE_DIR] exists"
+fi
+
+echo "The compile script is at [$0]"
+echo "The build pack is situated at [$BUILD_PACK_DIR]"
+
+echo "Moving to the cache dir..."
+cd "$CACHE_DIR"
+echo "Now in [$(pwd)]"
+
+echo "Directory listing:"
+ls -la
+
+echo "Listing Build Pack Directory:"
+ls -la /tmp/buildpacks
+
+echo "Listing Build Pack Cache:"
+ls -la "$BUILDPACK_CACHE"
+
+echo "Listing Environment:"
+env
+
+echo "Who am i?"
+whoami
+
+echo "Disk Usage:"
+df -h
+
+echo "Listing OS Info:"
+cat /etc/issue
+
+echo "Listing script versions:"
+python -V
+echo
+ruby -v
+echo
+perl -v
+
+echo "User Limits:"
+ulimit -a
+echo
+
+echo "Check for FUSE support"
+/sbin/mount.fuse -h
+ls -l /usr/share/doc/fuse-utils
+
+echo "CPU Info"
+cat /proc/cpuinfo
+
+echo "Look for staging_info.yml file"
+cat "$BUILD_DIR/staging_info.yml"
+
+cd ../
