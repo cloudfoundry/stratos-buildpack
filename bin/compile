@@ -5,7 +5,7 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 export BUILDPACK_DIR=`dirname $(readlink -f ${BASH_SOURCE%/*})`
 
-${BUILDPACK_DIR}/bin/debug $1 $2
+#${BUILDPACK_DIR}/bin/debug $1 $2
 
 #export DEPS_DIR="$BUILD_DIR/.cloudfoundry"
 #mkdir -p "$DEPS_DIR/0"
@@ -26,11 +26,7 @@ source "$BUILDPACK_DIR/scripts/install_nodejs.sh"
 
 echo "-----> Running stratos build compile"
 
-echo "Listing build folder contents"
-
-ls -al $BUILD_DIR
-
-echo "Checking go and nodejs versions"
+echo "-----> Checking versions"
 
 export PATH=$NodeDir/bin:$GoInstallDir/go/bin:$GlideDir:$PATH
 
@@ -49,16 +45,10 @@ fi
 
 if [ ! -d "$CACHE_DIR/node_modules" ]; then
   mkdir -p "$CACHE_DIR/node_modules"
-else
-  echo "Cache directory node_modules exists"
-  ls -al $CACHE_DIR/node_modules
 fi
 
 if [ ! -d "$CACHE_DIR/bower_components" ]; then
   mkdir -p "$CACHE_DIR/bower_components"
-else
-  echo "Cache directory bower_components exists"
-  ls -al $CACHE_DIR/bower_components
 fi
 
 # node_modules is a symbolic link
@@ -66,19 +56,7 @@ ln -s $CACHE_DIR/node_modules $BUILD_DIR/node_modules
 # bower_components is a symbolic link
 ln -s $CACHE_DIR/bower_components $BUILD_DIR/bower_components
 
-ls -al $BUILD_DIR
-
-#npm install -g node-gyp node-sass mkdirp
-
 # Build the console
 $BUILD_DIR/deploy/cloud-foundry/build.sh
 
 echo "Stratos UI : Build complete"
-
-echo "Build directory [$BUILD_DIR] exists"
-echo "Build directory contents..."
-ls -lah $BUILD_DIR
-
-du --summarize -h $BUILD_DIR
-
-ls -lah $BUILD_DIR/outputs
