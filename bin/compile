@@ -48,10 +48,10 @@ else
 fi
 
 if [ ! -d "$CACHE_DIR/node_modules" ]; then
-  mkdir -p "$CACHE_DIR/mode_modules"
+  mkdir -p "$CACHE_DIR/node_modules"
 else
   echo "Cache directory node_modules exists"
-  ls -al $CACHE_DIR/mode_modules
+  ls -al $CACHE_DIR/node_modules
 fi
 
 if [ ! -d "$CACHE_DIR/bower_components" ]; then
@@ -62,13 +62,13 @@ else
 fi
 
 # node_modules is a symbolic link
-ln -s $CACHE_DIR/mode_modules $BUILD_DIR/node_modules
+ln -s $CACHE_DIR/node_modules $BUILD_DIR/node_modules
 # bower_components is a symbolic link
 ln -s $CACHE_DIR/bower_components $BUILD_DIR/bower_components
 
 ls -al $BUILD_DIR
 
-npm install -g node-gyp node-sass mkdirp
+#npm install -g node-gyp node-sass mkdirp
 
 # Build the console
 $BUILD_DIR/deploy/cloud-foundry/build.sh
