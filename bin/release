@@ -15,8 +15,4 @@ rm -rf $BUILD_DIR/outputs
 # Do not use the Procfile if it is there
 rm -rf $BUILD_DIR/Procfile
 
-cat <<EOF
----
-default_process_types:
-  web: ./portal-proxy
-EOF
+cat $BUILD_DIR/stratos-buildpack.yml
