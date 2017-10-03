@@ -72,7 +72,7 @@ ln -s $CACHE_DIR/bower_components $BUILD_DIR/bower_components
 echo "-----> Running stratos build compile [`date +%H:%M:%S`]"
 
 # Build the console
-$BUILD_DIR/deploy/cloud-foundry/build.sh
+$BUILD_DIR/deploy/cloud-foundry/build.sh $BUILD_DIR $CACHE_DIR
 
 echo "-----> Stratos UI build complete [`date +%H:%M:%S`]"
 echo "-----> Build time:"
