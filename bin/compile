@@ -55,9 +55,9 @@ ln -s $CACHE_DIR/node_modules $BUILD_DIR/node_modules
 # bower_components is a symbolic link
 ln -s $CACHE_DIR/bower_components $BUILD_DIR/bower_components
 
-echo "-----> Running stratos build compile"
+echo "-----> Running stratos build compile [`date +%H:%M:%S`]"
 
 # Build the console
-time $BUILD_DIR/deploy/cloud-foundry/build.sh
+$BUILD_DIR/deploy/cloud-foundry/build.sh
 
-echo "-----> Stratos UI build complete"
+echo "-----> Stratos UI build complete [`date +%H:%M:%S`]"
