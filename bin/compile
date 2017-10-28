@@ -56,25 +56,32 @@ else
   echo "Cache directory [$CACHE_DIR] exists"
 fi
 
-if [ ! -d "$CACHE_DIR/node_modules" ]; then
-  mkdir -p "$CACHE_DIR/node_modules"
+# Setup cache folders for npm and bower
+if [ ! -d "$CACHE_DIR/npm_cache" ]; then
+  mkdir -p "$CACHE_DIR/npm_cache"
 fi
 
-if [ ! -d "$CACHE_DIR/bower_components" ]; then
-  mkdir -p "$CACHE_DIR/bower_components"
+if [ ! -d "$CACHE_DIR/bower_cache" ]; then
+  mkdir -p "$CACHE_DIR/bower_cache"
+  mkdir -p "$CACHE_DIR/bower_cache/packages"
+  mkdir -p "$CACHE_DIR/bower_cache/registry"
 fi
 
-# node_modules is a symbolic link
-ln -s $CACHE_DIR/node_modules $BUILD_DIR/node_modules
-# bower_components is a symbolic link
-ln -s $CACHE_DIR/bower_components $BUILD_DIR/bower_components
+npm config set cache $CACHE_DIR/npm_cache
+export bower_storage__packages=$CACHE_DIR/bower_cache/packages
+export bower_storage__registry=$CACHE_DIR/bower_cache/registry
 
 echo "-----> Running stratos build compile [`date +%H:%M:%S`]"
 
 # Build the console
 $BUILD_DIR/deploy/cloud-foundry/build.sh $BUILD_DIR $CACHE_DIR
 
+# Remove the node_modules and bower_components folders - only needed for build
+rm -rfln -s $BUILD_DIR/node_modules
+rm -rf $BUILD_DIR/bower_components
+
 echo "-----> Stratos UI build complete [`date +%H:%M:%S`]"
 echo "-----> Build time:"
 END_TIME=`date +%s`
 show_time $(($END_TIME - $START_TIME))
+
