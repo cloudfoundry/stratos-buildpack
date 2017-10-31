@@ -76,15 +76,6 @@ echo "-----> Running stratos build compile [`date +%H:%M:%S`]"
 # Build the console
 $BUILD_DIR/deploy/cloud-foundry/build.sh $BUILD_DIR $CACHE_DIR
 
-# Remove the node_modules and bower_components folders - only needed for build
-if [ -d "$BUILD_DIR/node_modules" ]; then
-  rm -rf $BUILD_DIR/node_modules
-fi
-
-if [ -d "$BUILD_DIR/bower_components" ]; then
-  rm -rf $BUILD_DIR/bower_components
-fi
-
 echo "-----> Stratos UI build complete [`date +%H:%M:%S`]"
 echo "-----> Build time:"
 END_TIME=`date +%s`
