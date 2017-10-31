@@ -6,7 +6,7 @@ export BUILDPACK_DIR=`dirname $(readlink -f ${BASH_SOURCE%/*})`
 
 # Remove the node_modules and bower_components folders - only needed for build
 
-if [ -L "$BUILD_DIR/node_modules" && -d "$BUILD_DIR/node_modules" ]; then
+if [[ -L "$BUILD_DIR/node_modules" && -d "$BUILD_DIR/node_modules" ]]; then
   rm $BUILD_DIR/node_modules
 fi
 
@@ -14,7 +14,7 @@ if [ -d "$BUILD_DIR/node_modules" ]; then
   rm -rf $BUILD_DIR/node_modules
 fi
 
-if [ -L "$BUILD_DIR/bower_components" && -d "$BUILD_DIR/bower_components" ]; then
+if [[ -L "$BUILD_DIR/bower_components" && -d "$BUILD_DIR/bower_components" ]]; then
   rm $BUILD_DIR/bower_components
 fi
 
