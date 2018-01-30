@@ -28,7 +28,7 @@ START_TIME=`date +%s`
 #mkdir -p "$BUILD_DIR/.profile.d"
 #echo "export DEPS_DIR=\$HOME/.cloudfoundry" > "$BUILD_DIR/.profile.d/0000_set-deps-dir.sh"
 
-echo "Stratos UI Buildpack"
+echo "Stratos Buildpack"
 echo "-----> Stack ${CF_STACK}"
 
 # Install go
@@ -76,7 +76,7 @@ echo "-----> Running stratos build compile [`date +%H:%M:%S`]"
 # Build the console
 $BUILD_DIR/deploy/cloud-foundry/build.sh $BUILD_DIR $CACHE_DIR
 
-echo "-----> Stratos UI build complete [`date +%H:%M:%S`]"
+echo "-----> Stratos build complete [`date +%H:%M:%S`]"
 echo "-----> Build time:"
 END_TIME=`date +%s`
 show_time $(($END_TIME - $START_TIME))
