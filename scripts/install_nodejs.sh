@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-NODE_VERSION="8.9.4"
+NODE_VERSION="10.0.0"
 
 export NodeInstallDir="/tmp/node$NODE_VERSION"
 export NodeDir="$NodeInstallDir/node-v${NODE_VERSION}-linux-x64"
@@ -9,9 +9,9 @@ export NodeDir="$NodeInstallDir/node-v${NODE_VERSION}-linux-x64"
 mkdir -p $NodeInstallDir
 
 if [ ! -f  $NodeDir/bin/node ]; then
-  NODE_MD5="5bda713bd4aa39394536fc48c744854b"
+  NODE_MD5="3f6e9d3f486d9d0b792b9ab6d5c613d6"
 
-  URL=https://buildpacks.cloudfoundry.org/dependencies/node/node-8.9.4-linux-x64-40e8e080.tgz
+  URL=https://buildpacks.cloudfoundry.org/dependencies/node/node-10.0.0-linux-x64-3e163e3d.tgz
 
   echo "-----> Download Nodejs ${NODE_VERSION}"
   curl -s -L --retry 15 --retry-delay 2 $URL -o /tmp/nodejs.tar.gz
