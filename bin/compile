@@ -88,7 +88,7 @@ echo "-----> Running stratos build compile [`date +%H:%M:%S`]"
 # Build the console
 $BUILD_DIR/deploy/cloud-foundry/build.sh $BUILD_DIR $CACHE_DIR
 
-echo "-----> Stratos UI build complete [`date +%H:%M:%S`]"
+echo "-----> Stratos build complete [`date +%H:%M:%S`]"
 echo "-----> Build time:"
 END_TIME=`date +%s`
 show_time $(($END_TIME - $START_TIME))
