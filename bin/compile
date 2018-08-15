@@ -46,7 +46,7 @@ fi
 # Install nodejs
 source "$BUILDPACK_DIR/scripts/install_nodejs.sh"
 
-export PATH=$NodeDir/bin:$GoInstallDir/go/bin:$GlideDir:$PATH
+export PATH=$NodeDir/bin:$GoInstallDir/go/bin
 
 echo "-----> Checking versions"
 echo "---------> Node Version: `node --version`"
