@@ -53,8 +53,10 @@ echo "---------> Node Version: `node --version`"
 echo "---------> NPM Version: `npm --version`"
 echo "---------> Go Version: `go version`"
 if [ -f "$BUILD_DIR/Gopkg.toml" ]; then
+  export PATH=$DepInstallDir/dep:$PATH
   echo "---------> Dep Version: `dep version`"
 else
+  export PATH=$GlideDir:$PATH
   echo "---------> Glide Version: `glide -v`"
 fi
 
