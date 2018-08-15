@@ -35,7 +35,7 @@ echo "-----> Stack ${CF_STACK}"
 source "$BUILDPACK_DIR/scripts/install_go.sh"
 
 # Install dep if we have the Gopkg.toml file, otherwise install Glide
-if [ -f "Gopkg.toml" ]; then
+if [ -f "$BUILD_DIR/Gopkg.toml" ]; then
   # Install dep
   source "$BUILDPACK_DIR/scripts/install_dep.sh"
 else
@@ -52,7 +52,7 @@ echo "-----> Checking versions"
 echo "---------> Node Version: `node --version`"
 echo "---------> NPM Version: `npm --version`"
 echo "---------> Go Version: `go version`"
-if [ -f "Gopkg.toml" ]; then
+if [ -f "$BUILD_DIR/Gopkg.toml" ]; then
   echo "---------> Dep Version: `dep version`"
 else
   echo "---------> Glide Version: `glide -v`"
