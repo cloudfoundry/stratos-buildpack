@@ -28,7 +28,7 @@ START_TIME=`date +%s`
 #mkdir -p "$BUILD_DIR/.profile.d"
 #echo "export DEPS_DIR=\$HOME/.cloudfoundry" > "$BUILD_DIR/.profile.d/0000_set-deps-dir.sh"
 
-echo "Stratos UI Buildpack"
+echo "Stratos Buildpack"
 echo "-----> Stack ${CF_STACK}"
 
 # Install go
@@ -46,14 +46,14 @@ fi
 # Install nodejs
 source "$BUILDPACK_DIR/scripts/install_nodejs.sh"
 
-export PATH=$NodeDir/bin:$GoInstallDir/go/bin
+export PATH=$NodeDir/bin:$GoInstallDir/go/bin:$PATH
 
 echo "-----> Checking versions"
 echo "---------> Node Version: `node --version`"
 echo "---------> NPM Version: `npm --version`"
 echo "---------> Go Version: `go version`"
 if [ -f "$BUILD_DIR/Gopkg.toml" ]; then
-  export PATH=$DepInstallDir/dep:$PATH
+  export PATH=$DepInstallDir:$PATH
   echo "---------> Dep Version: `dep version`"
 else
   export PATH=$GlideDir:$PATH
