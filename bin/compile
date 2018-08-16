@@ -28,7 +28,15 @@ START_TIME=`date +%s`
 #mkdir -p "$BUILD_DIR/.profile.d"
 #echo "export DEPS_DIR=\$HOME/.cloudfoundry" > "$BUILD_DIR/.profile.d/0000_set-deps-dir.sh"
 
-echo "Stratos Buildpack"
+echo ""
+echo "  _________ __                 __                 "
+echo " /   _____//  |_____________ _/  |_  ____  ______ "
+echo " \_____  \\   __\_  __ \__  \\   __\/  _ \/  ___/ "
+echo " /        \|  |  |  | \// __ \|  | (  <_> )___ \  "
+echo "/_______  /|__|  |__|  (____  /__|  \____/____  > "
+echo "        \/                  \/                \/  "
+echo "==========       Stratos Buildpack      =========="
+echo ""
 echo "-----> Stack ${CF_STACK}"
 
 # Install go
