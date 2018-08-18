@@ -28,7 +28,7 @@ if [ ! -f ${DOWNLOAD_FILE} ]; then
     exit 1
   fi
 else
-  echo "GO install package available in cache"
+  echo "-----> go install package available in cache"
 fi
 
 if [ ! -f $GoInstallDir/go/bin/go ]; then

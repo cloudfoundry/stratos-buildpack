@@ -22,7 +22,7 @@ if [ ! -f ${DOWNLOAD_FILE} ]; then
   echo "-----> Download dep ${DEP_VERSION}"
   curl -s -L --retry 15 --retry-delay 2 $URL -o ${DOWNLOAD_FILE}
 else
-  echo "dep install package available in cache"
+  echo "-----> dep install package available in cache"
 fi
 
 if [ ! -f $DepInstallDir/dep ]; then

@@ -30,7 +30,7 @@ if [ ! -f ${DOWNLOAD_FILE} ]; then
     exit 1
   fi
 else
-  echo "NodeJS install package available in cache"
+  echo "-----> Nodejs install package available in cache"
 fi
 
 if [ ! -f $NodeDir/bin/node ]; then
