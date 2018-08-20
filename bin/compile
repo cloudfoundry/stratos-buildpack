@@ -4,6 +4,7 @@ set -euo pipefail
 BUILD_DIR=$1
 CACHE_DIR=$2
 export BUILDPACK_DIR=`dirname $(readlink -f ${BASH_SOURCE%/*})`
+NEED_NODE=true
 
 if [ -f $BUILD_DIR/stratos-debug ]; then
   ${BUILDPACK_DIR}/bin/debug $1 $2
@@ -23,30 +24,55 @@ function show_time () {
 
 START_TIME=`date +%s`
 
-#export DEPS_DIR="$BUILD_DIR/.cloudfoundry"
-#mkdir -p "$DEPS_DIR/0"
-#mkdir -p "$BUILD_DIR/.profile.d"
-#echo "export DEPS_DIR=\$HOME/.cloudfoundry" > "$BUILD_DIR/.profile.d/0000_set-deps-dir.sh"
-
+echo " "
+echo "   _____ __             __            "
+echo "  / ___// /__________ _/ /_____  _____"
+echo "  \__ \/ __/ ___/ __ \`/ __/ __ \/ ___/"
+echo " ___/ / /_/ /  / /_/ / /_/ /_/ (__  ) "
+echo "/____/\__/_/   \__,_/\__/\____/____/  "
+echo " "
 echo "Stratos Buildpack"
+echo " "
 echo "-----> Stack ${CF_STACK}"
+
+# Don't need node if the frontend UI is pre-built and we're using dep
+if [ -f "$BUILD_DIR/stratos-frontend-prebuild.zip" ] && [ -f  "$BUILD_DIR/Gopkg.toml" ]; then
+  NEED_NODE=false
+fi
 
 # Install go
 source "$BUILDPACK_DIR/scripts/install_go.sh"
+export PATH=$GoInstallDir/go/bin:$PATH
 
-# Install glide
-source "$BUILDPACK_DIR/scripts/install_glide.sh"
+# Install dep if we have the Gopkg.toml file, otherwise install Glide
+if [ -f "$BUILD_DIR/Gopkg.toml" ]; then
+  # Install dep
+  source "$BUILDPACK_DIR/scripts/install_dep.sh"
+else
+  # Install glide
+  source "$BUILDPACK_DIR/scripts/install_glide.sh"
+fi
 
-# Install nodejs
-source "$BUILDPACK_DIR/scripts/install_nodejs.sh"
-
-export PATH=$NodeDir/bin:$GoInstallDir/go/bin:$GlideDir:$PATH
+# Install node if needed
+if [ "$NEED_NODE" == "true" ]; then
+  # Install nodejs
+  source "$BUILDPACK_DIR/scripts/install_nodejs.sh"
+  export PATH=$NodeDir/bin:$PATH
+fi
 
 echo "-----> Checking versions"
-echo "---------> Node Version: `node --version`"
-echo "---------> NPM Version: `npm --version`"
+if [ "$NEED_NODE" == "true" ]; then
+  echo "---------> Node Version: `node --version`"
+  echo "---------> NPM Version: `npm --version`"
+fi
 echo "---------> Go Version: `go version`"
-echo "---------> Glide Version: `glide -v`"
+if [ -f "$BUILD_DIR/Gopkg.toml" ]; then
+  export PATH=$DepInstallDir:$PATH
+  echo "---------> Dep Version: `dep version`"
+else
+  export PATH=$GlideDir:$PATH
+  echo "---------> Glide Version: `glide -v`"
+fi
 
 # Store the node_modules in the cache folder via a symlink
 if [ ! -d "$CACHE_DIR" ]; then
@@ -56,28 +82,21 @@ else
   echo "Cache directory [$CACHE_DIR] exists"
 fi
 
-# Setup cache folders for npm and bower
+# Setup cache folders for npm
 if [ ! -d "$CACHE_DIR/npm_cache" ]; then
   mkdir -p "$CACHE_DIR/npm_cache"
 fi
 
-if [ ! -d "$CACHE_DIR/bower_cache" ]; then
-  mkdir -p "$CACHE_DIR/bower_cache"
-  mkdir -p "$CACHE_DIR/bower_cache/packages"
-  mkdir -p "$CACHE_DIR/bower_cache/registry"
+if [ "$NEED_NODE" == "true" ]; then
+  npm config set cache $CACHE_DIR/npm_cache
 fi
-
-npm config set cache $CACHE_DIR/npm_cache
-export bower_storage__packages=$CACHE_DIR/bower_cache/packages
-export bower_storage__registry=$CACHE_DIR/bower_cache/registry
 
 echo "-----> Running stratos build compile [`date +%H:%M:%S`]"
 
-# Build the console
+# Build Stratos
 $BUILD_DIR/deploy/cloud-foundry/build.sh $BUILD_DIR $CACHE_DIR
 
 echo "-----> Stratos build complete [`date +%H:%M:%S`]"
 echo "-----> Build time:"
 END_TIME=`date +%s`
 show_time $(($END_TIME - $START_TIME))
-
