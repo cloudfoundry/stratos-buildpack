@@ -1,5 +1,5 @@
 ---
-language: stratos-ui
+language: stratos
 dependencies: []
 include_files:
   - bin/compile
