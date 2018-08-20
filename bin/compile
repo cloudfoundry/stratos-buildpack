@@ -24,15 +24,15 @@ function show_time () {
 
 START_TIME=`date +%s`
 
-echo ""
+echo " "
 echo "   _____ __             __            "
 echo "  / ___// /__________ _/ /_____  _____"
 echo "  \__ \/ __/ ___/ __ \`/ __/ __ \/ ___/"
 echo " ___/ / /_/ /  / /_/ / /_/ /_/ (__  ) "
 echo "/____/\__/_/   \__,_/\__/\____/____/  "
-echo ""
+echo " "
 echo "Stratos Buildpack"
-echo ""
+echo " "
 echo "-----> Stack ${CF_STACK}"
 
 # Don't need node if the frontend UI is pre-built and we're using dep
