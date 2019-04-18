@@ -44,12 +44,14 @@ fi
 source "$BUILDPACK_DIR/scripts/install_go.sh"
 export PATH=$GoInstallDir/go/bin:$PATH
 
-# Install dep if we have the Gopkg.toml file, otherwise install Glide
+# Install dep if we have the Gopkg.toml file
 if [ -f "$BUILD_DIR/Gopkg.toml" ]; then
   # Install dep
   source "$BUILDPACK_DIR/scripts/install_dep.sh"
-else
-  # Install glide
+fi
+
+# Install glide if we're building old v1
+if [ -f "$BUILD_DIR/components/app-core/backend/glide.yaml" ]; then
   source "$BUILDPACK_DIR/scripts/install_glide.sh"
 fi
 

@@ -3,7 +3,7 @@ set -euo pipefail
 
 # Download dep
 
-DEP_VERSION="0.5.0"
+DEP_VERSION="0.5.1"
 DEP_PLATFORM="linux-amd64"
 
 DOWNLOAD_FOLDER=${CACHE_DIR}/Downloads
