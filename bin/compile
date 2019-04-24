@@ -71,7 +71,9 @@ echo "---------> Go Version: `go version`"
 if [ -f "$BUILD_DIR/Gopkg.toml" ]; then
   export PATH=$DepInstallDir:$PATH
   echo "---------> Dep Version: `dep version`"
-else
+fi
+
+if [ -f "$BUILD_DIR/components/app-core/backend/glide.yaml" ]; then
   export PATH=$GlideDir:$PATH
   echo "---------> Glide Version: `glide -v`"
 fi
