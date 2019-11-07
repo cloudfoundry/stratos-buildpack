@@ -1,6 +1,10 @@
 #!/bin/bash
 set -euo pipefail
 
+#############################################################################
+# Deprecated - not used in this version - will be removed in a future version
+#############################################################################
+
 # Download dep
 
 DEP_VERSION="0.5.1"

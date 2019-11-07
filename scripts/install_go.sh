@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-GO_VERSION="1.12.4"
+GO_VERSION="1.13.4"
 
 DOWNLOAD_FOLDER=${CACHE_DIR}/Downloads
 mkdir -p ${DOWNLOAD_FOLDER}
@@ -15,7 +15,7 @@ if [ ! -f ${DOWNLOAD_FILE} ]; then
   # Delete any cached go downloads, since those are now out of date
   rm -rf ${DOWNLOAD_FOLDER}/go*.tar.gz
 
-  GO_SHA256="d7d1f1f88ddfe55840712dc1747f37a790cbcaa448f6c9cf51bbe10aa65442f5"
+  GO_SHA256="692d17071736f74be04a72a06dab9cac1cd759377bd85316e52b2227604c004c"
   URL=https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz
 
   echo "-----> Download go ${GO_VERSION}"

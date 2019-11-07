@@ -31,7 +31,7 @@ echo "  \__ \/ __/ ___/ __ \`/ __/ __ \/ ___/"
 echo " ___/ / /_/ /  / /_/ / /_/ /_/ (__  ) "
 echo "/____/\__/_/   \__,_/\__/\____/____/  "
 echo " "
-echo "Stratos Buildpack"
+echo "Stratos Buildpack V3"
 echo " "
 echo "-----> Stack ${CF_STACK}"
 
@@ -43,17 +43,6 @@ fi
 # Install go
 source "$BUILDPACK_DIR/scripts/install_go.sh"
 export PATH=$GoInstallDir/go/bin:$PATH
-
-# Install dep if we have the Gopkg.toml file
-if [ -f "$BUILD_DIR/Gopkg.toml" ]; then
-  # Install dep
-  source "$BUILDPACK_DIR/scripts/install_dep.sh"
-fi
-
-# Install glide if we're building old v1
-if [ -f "$BUILD_DIR/components/app-core/backend/glide.yaml" ]; then
-  source "$BUILDPACK_DIR/scripts/install_glide.sh"
-fi
 
 # Install node if needed
 if [ "$NEED_NODE" == "true" ]; then
@@ -67,16 +56,8 @@ if [ "$NEED_NODE" == "true" ]; then
   echo "---------> Node Version: `node --version`"
   echo "---------> NPM Version: `npm --version`"
 fi
-echo "---------> Go Version: `go version`"
-if [ -f "$BUILD_DIR/Gopkg.toml" ]; then
-  export PATH=$DepInstallDir:$PATH
-  echo "---------> Dep Version: `dep version`"
-fi
 
-if [ -f "$BUILD_DIR/components/app-core/backend/glide.yaml" ]; then
-  export PATH=$GlideDir:$PATH
-  echo "---------> Glide Version: `glide -v`"
-fi
+echo "---------> Go Version: `go version`"
 
 # Store the node_modules in the cache folder via a symlink
 if [ ! -d "$CACHE_DIR" ]; then

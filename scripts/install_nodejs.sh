@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-NODE_VERSION="8.9.4"
+NODE_VERSION="12.13.0"
 
 DOWNLOAD_FOLDER=${CACHE_DIR}/Downloads
 mkdir -p ${DOWNLOAD_FOLDER}
@@ -17,16 +17,17 @@ if [ ! -f ${DOWNLOAD_FILE} ]; then
   # Delete any cached node downloads, since those are now out of date
   rm -rf ${DOWNLOAD_FOLDER}/node*.tar.gz
 
-  NODE_MD5="5bda713bd4aa39394536fc48c744854b"
-  URL=https://buildpacks.cloudfoundry.org/dependencies/node/node-8.9.4-linux-x64-40e8e080.tgz
+  NODE_SHA256="55d69507d240b1ce582ce1c66e675b2271d8c3585f76c453595b3f3f20f4ed09"
+  URL=https://buildpacks.cloudfoundry.org/dependencies/node/node-12.13.0-linux-x64-cflinuxfs3-55d69507.tgz
+  
 
   echo "-----> Download Nodejs ${NODE_VERSION}"
   curl -s -L --retry 15 --retry-delay 2 $URL -o ${DOWNLOAD_FILE}
 
-  DOWNLOAD_MD5=$(md5sum ${DOWNLOAD_FILE} | cut -d ' ' -f 1)
+  DOWNLOAD_SHA256=$(shasum -a 256 ${DOWNLOAD_FILE} | cut -d ' ' -f 1)  
 
-  if [[ $DOWNLOAD_MD5 != $NODE_MD5 ]]; then
-    echo "       **ERROR** MD5 mismatch: got $DOWNLOAD_MD5 expected $NODE_MD5"
+  if [[ $DOWNLOAD_SHA256 != $NODE_SHA256 ]]; then
+    echo "       **ERROR** SHA256 mismatch: got $DOWNLODOWNLOAD_SHA256AD_MD5 expected $NODE_SHA256"
     exit 1
   fi
 else

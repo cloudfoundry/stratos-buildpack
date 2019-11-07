@@ -1,6 +1,10 @@
 #!/bin/bash
 set -euo pipefail
 
+#############################################################################
+# Deprecated - not used in this version - will be removed in a future version
+#############################################################################
+
 # Download glide
 
 GLIDE_VERSION="0.13.0"
