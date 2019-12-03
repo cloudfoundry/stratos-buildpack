@@ -1,4 +1,11 @@
 #!/bin/bash
+
+if [[ -n "${STRATOS_BP_DEBUG}" ]]; then
+    echo "Turning on bash traces as instructed in STRATOS_BP_DEBUG=${STRATOS_BP_DEBUG}"
+    echo "Undefine the variable to turn debugging off"
+    set -x
+fi
+
 set -euo pipefail
 
 BUILD_DIR=$1
