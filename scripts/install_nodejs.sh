@@ -33,9 +33,16 @@ else
   echo "-----> Nodejs install package available in cache"
 fi
 
+echo "Downloaded NodeJS package OK"
+
 if [ ! -f $NodeDir/bin/node ]; then
   tar xzf ${DOWNLOAD_FILE} -C $NodeInstallDir
 fi
+
+echo "Unpacked NodeJS package OK"
+
+ls -al $NodeDir
+ls -al $NodeDir/bin
 
 if [ ! -f $NodeDir/bin/node ]; then
   echo "       **ERROR** Could not download nodejs"
