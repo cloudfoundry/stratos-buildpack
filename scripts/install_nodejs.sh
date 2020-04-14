@@ -8,7 +8,6 @@ mkdir -p ${DOWNLOAD_FOLDER}
 DOWNLOAD_FILE=${DOWNLOAD_FOLDER}/node${NODE_VERSION}.tar.gz
 
 export NodeInstallDir="/tmp/node$NODE_VERSION"
-export NodeDir="$NodeInstallDir/node-v${NODE_VERSION}-linux-x64"
 
 mkdir -p $NodeInstallDir
 
@@ -35,18 +34,18 @@ fi
 
 echo "Downloaded NodeJS package OK"
 
-if [ ! -f $NodeDir/bin/node ]; then
+if [ ! -f $NodeInstallDir/bin/node ]; then
   tar xzf ${DOWNLOAD_FILE} -C $NodeInstallDir
 fi
 
 echo "Unpacked NodeJS package OK"
 
-ls -al $NodeDir
-ls -al $NodeDir/bin
+ls -al $NodeInstallDir
+ls -al $NodeInstallDir/bin
 
-if [ ! -f $NodeDir/bin/node ]; then
+if [ ! -f $NodeInstallDir/bin/node ]; then
   echo "       **ERROR** Could not download nodejs"
   exit 1
 fi
 
-export NODE_HOME=$NodeDir
+export NODE_HOME=$NodeInstallDir
