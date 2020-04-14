@@ -14,14 +14,6 @@ if [ -d "$BUILD_DIR/node_modules" ]; then
   rm -rf $BUILD_DIR/node_modules
 fi
 
-if [[ -L "$BUILD_DIR/bower_components" && -d "$BUILD_DIR/bower_components" ]]; then
-  rm $BUILD_DIR/bower_components
-fi
-
-if [ -d "$BUILD_DIR/bower_components" ]; then
-  rm -rf $BUILD_DIR/bower_components
-fi
-
 # Do not use the Procfile if it is there
 rm -rf $BUILD_DIR/Procfile
 
