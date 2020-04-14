@@ -55,7 +55,7 @@ export PATH=$GoInstallDir/go/bin:$PATH
 if [ "$NEED_NODE" == "true" ]; then
   # Install nodejs
   source "$BUILDPACK_DIR/scripts/install_nodejs.sh"
-  export PATH=$NodeDir/bin:$PATH
+  export PATH=$NodeInstallDir/bin:$PATH
 fi
 
 echo "-----> Checking versions"
