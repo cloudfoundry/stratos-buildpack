@@ -9,7 +9,6 @@ DOWNLOAD_FILE=${DOWNLOAD_FOLDER}/go${GO_VERSION}.tar.gz
 
 export GoInstallDir="/tmp/go$GO_VERSION"
 mkdir -p $GoInstallDir
-export GOPATH=$GoInstallDir
 
 # Download the archive if we do not have it cached
 if [ ! -f ${DOWNLOAD_FILE} ]; then

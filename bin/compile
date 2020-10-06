@@ -50,6 +50,9 @@ fi
 # Install go
 source "$BUILDPACK_DIR/scripts/install_go.sh"
 export PATH=$GoInstallDir/go/bin:$PATH
+mkdir -p /tmp/gopath
+export GOPATH=/tmp/gopath
+export PATH=$GOPATH/bin:$PATH
 
 # Install node if needed
 if [ "$NEED_NODE" == "true" ]; then
